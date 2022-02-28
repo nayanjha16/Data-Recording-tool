@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<center><h1>Recording Tool LTRC IIITH</h1> <p>Personal Details Form </p>
+
+
+<form method="post" action="{% url 'signup' %}">
+  {% csrf_token %}
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="f_name"><br> <br> 
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="l_name">
+  <br> <br>
+
+  <label for="Gender">Gender:   </label>
+
+  <select name="gender" id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="others">Others</option>
+  </select>
+  <br> <br>
+  <label for="contact">Contact Details:</label>
+  <input type="number" id="contact" name="contact"><br> <br> 
+  <label for="email">Email ID:</label>
+  <input type="text" id="email" name="email"><br> <br> 
+  <label for="language">Langauges Fluent in:</label>
+  <input type="text" id="language" name="lang_fluent_in">
+  <br> <br>
+
+  <label for="disability">Disability if any :</label>
+  <input type="text" id="disability" name="disability">
+  <br> <br>
+
+  <label for="username">Enter username :</label>
+  <input type="text" id="username" name="username"> <br><br>
+  <label for="password">Enter Password :</label>
+  <input type="text" id="password" name="password"> <br><br>
+
+  <input type="submit" value="Submit">
+</form>
+</center>
+</body>
+</html>

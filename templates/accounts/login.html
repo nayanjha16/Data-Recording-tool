@@ -77,7 +77,7 @@
                         <h3 class="panel-title text-center">Data Collector login</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" method="POST">
+                        <form role="form" method="POST" action="{% url 'login' %}">
                             {% csrf_token %}
                             <fieldset>
 
