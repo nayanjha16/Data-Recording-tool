@@ -22,7 +22,7 @@ def login(request):
 def logout(request):
     if request.user.is_authenticated:
         auth.logout(request)
-    return HttpResponse('/')
+    return HttpResponseRedirect('/')
 
 
 def signup(request):
