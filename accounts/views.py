@@ -5,7 +5,7 @@ from . import forms
 
 def login(request):
     if request.user.is_authenticated:
-        return HttpResponse('<center>ALREADY LOGGED IN </center>')
+        return HttpResponseRedirect('/user/dashboard')
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -13,10 +13,16 @@ def login(request):
                                  password=password)
         if user and user.is_active:
             auth.login(request, user)
-            return HttpResponse('<center> Login successfull </center>')
+            return HttpResponseRedirect('/user/dashboard')
         else:
             return HttpResponse('<center> Incorrect credentials </center>')
     return render(request, 'accounts/login.html', {})
+
+
+def logout(request):
+    if request.user.is_authenticated:
+        auth.logout(request)
+    return HttpResponse('/')
 
 
 def signup(request):
