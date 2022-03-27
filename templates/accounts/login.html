@@ -93,7 +93,9 @@
                                 <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
                             </fieldset>
                         </form><br>
-                        <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+                        <a href="{% url 'signup' %}">
+                            <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+                        </a>
 
                         {% if error %}
                         <strong> Error !</strong> Wrong Username or Password.

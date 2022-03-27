@@ -93,10 +93,11 @@ span.psw {
   </div>
   <input id="adioPlay" type="audio/microphone" style="background-color: gray; color:white" value="Playback Recorded_Audio" >
   <!--<input type="button" style="background-color:gray;  color:white" value="Discard" onclick="msg()"> -->
-  <input type="submit" style="background-color: gray; color:white" value="Submit"> <br>
-  <audio id="vid" controls disabled="disabled"> </audio>
-       <audio id="vid2" controls> </audio>
-        
+  <!-- <input type="submit" style="background-color: gray; color:white" value="Submit">  -->
+  <br>
+  <audio id="vid" controls disabled="disabled" hidden="true"> </audio>
+   <audio id="vid2" controls> </audio>
+
 <br>
  <label for="comments">Comments from the speaker if any :</label>
 <br>
@@ -162,10 +163,10 @@ span.psw {
                 audio.src = window.URL.createObjectURL(mediaStreamObj);
             }
             
-            audio.onloadedmetadata = function(ev) {
-                //show in the video element what is being captured by the webcam
-                //audio.play();
-            };
+            // audio.onloadedmetadata = function(ev) {
+            //     //show in the video element what is being captured by the webcam
+            //     //audio.play();
+            // };
             
             //add listeners for saving audio
             let start = document.getElementById('btnStart');
