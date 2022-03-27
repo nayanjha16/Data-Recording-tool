@@ -10,7 +10,6 @@ class signup_form(forms.ModelForm):
             'f_name',
             'l_name',
             'gender',
-            'email',
             'contact',
             'lang_fluent_in',
             'disability'

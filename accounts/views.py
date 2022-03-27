@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.contrib import auth
-from . import forms
+from . import forms, models
 
 
 def login(request):
@@ -41,5 +41,7 @@ def signup(request):
             return HttpResponseRedirect('/')
         else:
             resp = str(signup_form.errors) + " " + str(access_form.errors)
-            context = {'response': resp}
+            languages = models.users.LANG_CHOICES
+            context = {'response': resp,
+                       'languages': languages}
     return render(request, 'accounts/signup.html', {})
