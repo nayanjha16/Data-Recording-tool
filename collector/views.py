@@ -4,7 +4,7 @@ from . import models
 
 
 def dashboard(request):
-    return render(request, 'collector/recorder.html', context)
+    return render(request, 'collector/recorder.html', {})
     # if request.user.is_authenticated():
     #     try:
     #         user_prompts = models.audio_files.objects.filter(user=request.user)
