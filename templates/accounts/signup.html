@@ -1,185 +1,141 @@
 {% load static %}
 
 <!DOCTYPE html>
-<!-- <html lang="en">
-
+<html lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Data collector</title>
+    <title>Register Page</title>
 
-    <link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">
-    <link href="{% static "css/sb-admin-2.css"%}" rel="stylesheet">   
-    <link href="{% static "css/font-awesome.min.css"%}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/sb-admin-2.css' %}"/>
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}"/>
 
-    <style>
-        #outer {
-            position: absolute;
-            top: 250px;
-            z-index: 50000; 
-            background-color: white;   
-            height: 60%; 
-            box-shadow: 2px 4px 16px 2px rgba(0,0,0,0.4);
-            /*border-bottom: 4px solid #3498DB;*/
-               }
-
-        #log {
-            margin-top: 25%;
-        }
-
-        nav {
-            background-color: #123462 !important;
-            height:350px;
-            margin-bottom: 20px;
-        }
-        #zea {
-            width:50%; 
-            height:20%;
-        }
-
-        #but {
-            background-color:#123462; 
-            border-color: #123462;
-        }
-        .navbar-header {
-            text-align: center;
-        }
-        #zea {
-            width:400px;
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom:0;
+      width: 80%;
+      background-color: blue;
+      color: white;
+      text-align: center;
+      padding-left: 30%;
+      padding-right:30%;
     }
-
-    </style>   
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   </style>
+  <script src="js/jquery-1.10.2.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/sb-admin-2.js"></script>
 </head>
-
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default navbar-static-top " role="navigation">
-            <div class="navbar-header col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" >
-                <img id="zea" class=""  src="{% static "images/logo.jpg"%}">
-            </div>
-        </nav>
-   
-
-
-    <div class="container col-md-10 col-md-offset-1" id="outer" >
-
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div id="log" class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title text-center">Data Collector Signup</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" method="POST" action="{% url 'login' %}">
-                            {% csrf_token %}
-                            <fieldset>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
-                                     <input type="text" class="form-control" placeholder="Enter your first name" name="f_name">
-                                </div>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
-                                     <input type="text" class="form-control" placeholder="Enter your last name" name="l_name">
-                                </div>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
-                                    <select name="gender" class="form-control">
-                                       <option value="male">Male </option>
-                                       <option value="female">Female </option>
-                                       <option value="other">Other </option>
-                                </div>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
-                                    <input type="text" class="form-control" placeholder="Enter your contact number" name="contact">
-                                </div>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
-                                    <input type="text" class="form-control" placeholder="Enter your email" name="username">
-                                </div>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
-                                    <input type="password" class="form-control" placeholder="Enter password" name="password">
-                                </div>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
-                                    <select name="lang_fluent_in" class="form-control">
-                                      {% for lang in languages %}
-                                      <option value="{{lang}}">{{lang}} </option>
-                                      {% endfor %}
-                                </div>
-                                <div class="form-group input-group">
-                                    <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
-                                    <input type="text" class="form-control" placeholder="Enter disablity (if any)" name="disability">
-                                </div>
-                                <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
-                            </fieldset>
-                        </form><br>
-                        <a href="{% url 'login' %}">
-                            <button type="submit" class="btn btn-lg btn-primary btn-block">Already a user? LOGIN</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <center>
+    <div id="stickybar" class="animated  bounceInLeft " style="width:83%;"> 
+      <p id="headertitle" class="animated  bounceInDown delay-1s" style="height:60px;width:100%;background-color: rgb(52,128,143);color:whitesmoke;font-family:Georgia, 'Times New Roman', Times, serif;font-size:30px;text-align:center">User Signup Form</p>
     </div>
-</div>
+  </center>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Fill this form to Sign up!</h4>
+            </div>
+            <div class="panel-body">
+              <form role="form" method="POST" action="{% url 'signup' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="f_name" >First Name:</label>
+                  <input type="text" class="form-control" id="f_name" placeholder="Enter First Name" name="fname" required>
+                </div>
+                <div class="form-group">
+                  <label for="l_name">Last Name:</label>
+                  <input type="text" class="form-control" id="l_name" placeholder="Enter Last Name" name="lname" required>
+                </div>
+                <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select name="gender" class="form-control">
+                    <option value="male">Male </option>
+                    <option value="female">Female </option>
+                    <option value="other">Other </option>
+                 </select>
+                </div>
+
+                <div class="form-group">
+                 <label for="contact">Contact:</label>
+                 <input type="text" class="form-control" id="contact" placeholder="Enter contact Number" name="contact" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="pwd">Set Password for login:</label>
+                  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="disability">Disability:</label>
+                  <input type="text" class="form-control" id="disability" placeholder="Disclose disability if any" name="disability" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <center>
+        <div id="footer"  style="background: rgb(52,128,143);width:83%;">
+          <div class="container" style="color: black;">
+
+            <a class="planeText" href="https://www.iiit.ac.in/"> </a><a class="planeText" href="https://www.iiit.ac.in/"> </a><table>
+              <tbody><tr>
+                <td>
+                <table>
+                  <tbody><tr>
+                    <td><img src="{% static 'images/iiit_logo.png' %}" width="60px" height="60px"></td>
+                    <td width="10px;"></td>
+                    <td class="planeText" > <a href="https://www.iiit.ac.in/" style="color:black">International Institute of Information Technology,Hyderabad </a>
+                    <br>
+                    </td>
+                  </tr>
+                </tbody></table></td>
+
+                <td width="24%"></td>
 
 
-    <script src="{% static "js/jquery-1.10.2.js"%}"></script>
-    <script src="{% static "js/bootstrap.min.js"%}"></script>
-    <script src="{% static "js/sb-admin-2.js"%}"></script>
+                </td>
 
-</body>
+                <td width="30%"></td>
 
-</html -->>
+                <td>
+                <table>
+                  <tbody><tr>
+                    <td style="text-align: right" class="planeText">  <a href="https://ihub-data.iiit.ac.in/" style="color:black">IHUB-Data </a>
+                    <br>
+                    <a href="https://ihub-data.iiit.ac.in/" style="color:black">Hyderabad</a>
+                    </td>
+                    <td width="10px;"></td>
+                    <td><img src="{% static 'images/Ihub_logo.png' %}" height="50px"></td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+            </tbody></table>
 
-<!DOCTYPE html>
-<html>
-<body>
-
-<center><h1>Recording Tool LTRC IIITH</h1> <p>Personal Details Form </p>
+          </div>
+            </div>
+      </center>
 
 
-<form method="post" action="{% url 'signup' %}">
-  {% csrf_token %}
-  <label for="fname">First name:</label>
-  <input type="text" id="fname" name="f_name"><br> <br> 
-  <label for="lname">Last name:</label>
-  <input type="text" id="lname" name="l_name">
-  <br> <br>
-
-  <label for="Gender">Gender:   </label>
-
-  <select name="gender" id="gender">
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-    <option value="others">Others</option>
-  </select>
-  <br> <br>
-  <label for="contact">Contact Details:</label>
-  <input type="number" id="contact" name="contact"><br> <br> 
-  <label for="language">Langauges Fluent in:</label>
-  <input type="text" id="language" name="lang_fluent_in">
-  <br> <br>
-
-  <label for="disability">Disability if any :</label>
-  <input type="text" id="disability" name="disability">
-  <br> <br>
-
-  <label for="username">Enter username :</label>
-  <input type="text" id="username" name="username"> <br><br>
-  <label for="password">Enter Password :</label>
-  <input type="text" id="password" name="password"> <br><br>
-
-  <input type="submit" value="Submit">
-</form>
-</center>
 </body>
 </html>

@@ -1,126 +1,129 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>MediaCapture and Streams API</title>
-    <meta name="viewport" content="width=device-width">
-    <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+  <title>Recording Page</title>
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-button {
-  background-color: gray;/*#04AA6D;*/
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
 
-button:hover {
-  opacity: 0.8;
-}
+  <link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet">
+  <link href="{% static "css/sb-admin-2.css"%}" rel="stylesheet">
+  <link href="{% static "css/font-awesome.min.css"%}" rel="stylesheet" type="text/css">
 
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/7b0990d0b7.js" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
+   <link href="{% static "css/animate.css"%}" rel="stylesheet">
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
-
+   <style>
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom:0;
+      width: 80%;
+      background-color: blue;
+      color: white;
+      text-align: center;
+      padding-left: 30%;
+      padding-right:30%;
+    }
+   </style>
 </head>
 <body>
-    <center><h1>Recording Tool LTRC IIITH</h1> <p>Recording Form </p>
+  <center>
+<div id="stickybar" class="animated  bounceInLeft " style="width:83%;"> 
 
-
-<form >
-  <br> </br>
-  <label for="s_id">Sentence/word_id:</label>
-  <input type="text" id="fname" name="fname">
-  <br> </br>
-  <label for="lname">Sentence/word prompt:</label>
-  <input type="text" id="lname" name="lname">
-  <br> <br>
-  
-  <!-- Manually overridden the style of the buttons using inline css -->
-  <div class="holder">
-            <div data-role="controls">
-                
-   
+            <p id="headertitle" class="animated  bounceInDown delay-1s" style="height:60px;width:100%;background-color: rgb(52,128,143);color:whitesmoke;font-family:Georgia, 'Times New Roman', Times, serif;font-size:30px;text-align:center">Collection Module</p>
         
-  <input id="btnStart" class="record_button_class" type="button" style="background-color: gray; color:white" value="Record_Audio_start" >
-  <input id="btnStop" class="record_button_class" type="button" style="background-color: gray; color:white" value="End Recording" ">
-  </div>
-  <input id="adioPlay" type="audio/microphone" style="background-color: gray; color:white" value="Playback Recorded_Audio" >
-  <!--<input type="button" style="background-color:gray;  color:white" value="Discard" onclick="msg()"> -->
-  <!-- <input type="submit" style="background-color: gray; color:white" value="Submit">  -->
-  <br>
-  <audio id="vid" controls disabled="disabled" hidden="true"> </audio>
-   <audio id="vid2" controls> </audio>
+ </div>
+</center>
+<div class="container">
+   <center>
+  <form>
+  <div class="form-group">
+  <p class="text-center" id="s_id">Senetence id :1</p>  </div>
+    <div class="form-group">
+      <label for="s_prompt">Sentence/word prompt:</label>
+      <input type="text" class="form-control" id="s_prompt" placeholder="Sentence_text" name="s_prompt">
+    </div>
+    <div class="form-group">
+    <div class="bg-white p-4 rounded shadow-sm h-100">
 
-<br>
- <label for="comments">Comments from the speaker if any :</label>
-<br>
-<textarea id="comments" name="comments" rows="4" cols="50">
+          <button id="btnStart" onclick="return false;" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa-microphone-lines"></i></button>
+          <button id="btnStop" onclick="return false;" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa-stop"></i></button>
+          <button id="audioPlay" onclick="return false;" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa-play"></i></button>
+          <button type="submit" onclick="return false;" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa fa-arrow-circle-right fa-lg"></i></button>
+          <audio id="vid" controls hidden="true"> </audio>
+       <audio id="vid2" controls hidden="true"> </audio>
 
-</textarea>
-<br>
-<input type="submit" value="Final Submit">
+          </div>
+          </div>
+
+  </form>
+  </center>
 </div>
-</form>
+<div style="height:262px "> </div>
+<script>//The above div is a dummy div for placing footer properly</script>
+<center>
+<div id="footer"  style="background: rgb(52,128,143);width:83%;">
+  <div class="container" style="color: black;">
+
+    <a class="planeText" href="https://www.iiit.ac.in/"> </a><a class="planeText" href="https://www.iiit.ac.in/"> </a><table>
+      <tbody><tr>
+        <td>
+        <table>
+          <tbody><tr>
+            <!--<td><img src="images/iiit_logo.png" width="60px" height="60px"></td>-->
+            <td><img src="{% static "images/iiit_logo.png"%}" width="60px" height="60px"> </td>
+            <td width="10px;"></td>
+            <td class="planeText" > <a href="https://www.iiit.ac.in/" style="color:black">International Institute of Information Technology </a>
+            <br>
+             <a href="https://www.iiit.ac.in/" style="color:black">Hyderabad</a>
+            </td>
+          </tr>
+        </tbody></table></td>
+
+        <td width="24%"></td>
+
+
+        </td>
+
+        <td width="30%"></td>
+
+        <td>
+        <table>
+          <tbody><tr>
+            <td style="text-align: right" class="planeText">  <a href="https://ihub-data.iiit.ac.in/" style="color:black">IHUB-Data </a>
+            <br>
+            <a href="https://ihub-data.iiit.ac.in/" style="color:black">Hyderabad</a>
+            </td>
+            <td width="10px;"></td>
+            <!--<td><img src="images/Ihub_logo.png" height="50px"></td>-->
+            <td><img src="{% static "images/Ihub_logo.png"%}" height="50px"> </td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+    </tbody></table>
+
+  </div>
+    </div>
 </center>
 
-    
-    <main>
-        
-        
-        
-        
-        
-        
-    </main>    
-    <script>
-        
+
+
+<script>
+
         let constraintObj = { 
             audio: true, 
             video:false
@@ -163,22 +166,24 @@ span.psw {
                 audio.src = window.URL.createObjectURL(mediaStreamObj);
             }
             
-            // audio.onloadedmetadata = function(ev) {
-            //     //show in the video element what is being captured by the webcam
-            //     //audio.play();
-            // };
+            audio.onloadedmetadata = function(ev) {
+                //show in the audio element what is being captured by the microphone
+                //audio.play();
+            };
             
             //add listeners for saving audio
             let start = document.getElementById('btnStart');
             let stop = document.getElementById('btnStop');
             let audioSave = document.getElementById('vid2');
+            let audioplayback=document.getElementById('audioPlay');
+
             let mediaRecorder = new MediaRecorder(mediaStreamObj);
             let chunks = [];
             
             start.addEventListener('click', (ev)=>{
                 mediaRecorder.start();
                 console.log(mediaRecorder.state);
-            })
+            });
             stop.addEventListener('click', (ev)=>{
                 mediaRecorder.stop();
                 console.log(mediaRecorder.state);
@@ -191,13 +196,29 @@ span.psw {
                 chunks = [];
                 let audioURL = window.URL.createObjectURL(blob);
                 audioSave.src = audioURL;
+                //audioSave.play();
+
+                
             }
+            audioplayback.addEventListener('click', (ev)=>{ //this is to playback the recorded audio
+                audioSave.play();
+                console.log("within audioplayback");
+            });
         })
         .catch(function(err) { 
             console.log(err.name, err.message); 
         });
         
+        function playsound()
+        { audioSave.play();
+         }
         
     </script>
+
+
+<script>
+
+</script>
+
 </body>
 </html>
