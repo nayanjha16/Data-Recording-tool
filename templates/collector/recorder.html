@@ -15,11 +15,6 @@
   <link href="{% static "css/sb-admin-2.css"%}" rel="stylesheet">
   <link href="{% static "css/font-awesome.min.css"%}" rel="stylesheet" type="text/css">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/7b0990d0b7.js" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
    <link href="{% static "css/animate.css"%}" rel="stylesheet">
@@ -42,35 +37,40 @@
 </head>
 <body>
   <center>
-<div id="stickybar" class="animated  bounceInLeft " style="width:83%;"> 
-
-            <p id="headertitle" class="animated  bounceInDown delay-1s" style="height:60px;width:100%;background-color: rgb(52,128,143);color:whitesmoke;font-family:Georgia, 'Times New Roman', Times, serif;font-size:30px;text-align:center">Collection Module</p>
-        
+<div id="stickybar" class="animated  bounceInLeft " style="width:83%;">
+    <p id="headertitle" class="animated  bounceInDown delay-1s" style="height:60px;width:100%;background-color: rgb(52,128,143);color:whitesmoke;font-family:Georgia, 'Times New Roman', Times, serif;font-size:30px;text-align:center">Collection Module</p>
  </div>
 </center>
 <div class="container">
    <center>
-  <form>
-  <div class="form-group">
-  <p class="text-center" id="s_id">Senetence id :1</p>  </div>
-    <div class="form-group">
-      <label for="s_prompt">Sentence/word prompt:</label>
-      <input type="text" class="form-control" id="s_prompt" placeholder="Sentence_text" name="s_prompt">
+    <h3>
+      <div class="form-group">
+          <p class="text-center" id="s_id">Senetence id : {{id}}</p>
+      </div>
+      <div class="form-group">
+        <label for="s_prompt">Please speak the following sentence:</label>
     </div>
+  </h3>
+  <center>
+      <h2>{{prompt}}</h2><br>
+  </center>
     <div class="form-group">
     <div class="bg-white p-4 rounded shadow-sm h-100">
-
+        <form action="{% url 'upload_audio' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input id="formAudioField" name="audio" type="file" hidden="true">
+            <input name="pid" value="{{id}}" hidden="true">
           <button id="btnStart" onclick="return false;" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa-microphone-lines"></i></button>
           <button id="btnStop" onclick="return false;" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa-stop"></i></button>
           <button id="audioPlay" onclick="return false;" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa-play"></i></button>
-          <button type="submit" onclick="return false;" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa fa-arrow-circle-right fa-lg"></i></button>
+          <button type="submit" class="btn btn-info btn-circle btn-circle-xl m-1"><i class="fa-solid fa fa-arrow-circle-right fa-lg"></i></button>
+          <audio id="vid2" controls hidden="true" name="audio"> </audio>
+        </form>
           <audio id="vid" controls hidden="true"> </audio>
-       <audio id="vid2" controls hidden="true"> </audio>
 
           </div>
           </div>
 
-  </form>
   </center>
 </div>
 <div style="height:262px "> </div>
@@ -176,6 +176,7 @@
             let stop = document.getElementById('btnStop');
             let audioSave = document.getElementById('vid2');
             let audioplayback=document.getElementById('audioPlay');
+            let formAudioEle = document.getElementById('formAudioField')
 
             let mediaRecorder = new MediaRecorder(mediaStreamObj);
             let chunks = [];
@@ -196,6 +197,11 @@
                 chunks = [];
                 let audioURL = window.URL.createObjectURL(blob);
                 audioSave.src = audioURL;
+                let file = new File([blob], "audio.wav", {type:"audio/wav", lastModified:new Date().getTime()});
+                let container = new DataTransfer();
+                container.items.add(file);
+                formAudioEle.files = container.files;
+
                 //audioSave.play();
 
                 
