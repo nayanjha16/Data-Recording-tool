@@ -6,6 +6,7 @@ from . import forms, models
 def login(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/user/dashboard')
+    context = {}
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -15,8 +16,8 @@ def login(request):
             auth.login(request, user)
             return HttpResponseRedirect('/user/dashboard')
         else:
-            return HttpResponse('<center> Incorrect credentials </center>')
-    return render(request, 'accounts/login.html', {})
+            context = {"error": True}
+    return render(request, 'accounts/login.html', context)
 
 
 def logout(request):

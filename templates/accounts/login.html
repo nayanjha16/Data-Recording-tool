@@ -76,6 +76,9 @@
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">Data Collector login</h3>
                     </div>
+                    {% if error %}
+                    <strong> Error !</strong> Wrong Username or Password.
+                    {% endif %}
                     <div class="panel-body">
                         <form role="form" method="POST" action="{% url 'login' %}">
                             {% csrf_token %}
@@ -97,9 +100,6 @@
                             <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
                         </a>
 
-                        {% if error %}
-                        <strong> Error !</strong> Wrong Username or Password.
-                        {% endif %}
                     </div>
                 </div>
             </div>
