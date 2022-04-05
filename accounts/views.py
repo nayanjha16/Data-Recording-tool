@@ -42,3 +42,8 @@ def signup(request):
             resp = str(signup_form.errors) + " " + str(access_form.errors)
             context = {'errors': resp}
     return render(request, 'accounts/signup.html', {})
+
+def print_user_id_map(request):
+    users = auth.models.User.objects.all()
+    context = {"users": users}
+    return render(request, "accounts/user_id_map.html", context)
