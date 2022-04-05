@@ -12,14 +12,13 @@ def dashboard(request):
                 new_prompt_id = last_prompt.sentence.id + 1
                 new_prompt = models.sentences.objects.get(id=new_prompt_id)
             else:
-                new_prompt = last_prompt
-            #     return HttpResponseRedirect("/user/thankyou")
+                return HttpResponseRedirect("/user/thankyou")
             context = {'prompt': new_prompt.sentence,
-                       'id': new_prompt.sentence.id}
+                       'id': new_prompt.id}
         except BaseException as e:
             first_prompt = models.sentences.objects.get(id=1)
             context = {'prompt': first_prompt.sentence,
-                       'id': new_prompt.sentence.id}
+                       'id': first_prompt.id}
         return render(request, 'collector/recorder.html', context)
     else:
         return HttpResponseRedirect('/')
@@ -28,7 +27,6 @@ def dashboard(request):
 
 def upload_audio(request):
     if request.method == 'POST':
-        print(request.POST, request.FILES)
         audio_upload = forms.audio_upload_form(request.POST, request.FILES)
         if audio_upload.is_valid():
             audio = audio_upload.save(commit=False)
@@ -38,3 +36,6 @@ def upload_audio(request):
             audio.audio.name = str(audio.user.id) + "_" + str(audio.sentence.id) + ".wav"
             audio.save()
     return HttpResponseRedirect('/user/dashboard')
+
+def thankyou(request):
+    return render(request, 'collector/thankyou.html', {})
