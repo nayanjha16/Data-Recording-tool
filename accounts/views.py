@@ -37,11 +37,8 @@ def signup(request):
             access.save()
             user.user = access
             user.save()
-            context = {'response': 'User created successfully.'}
             return HttpResponseRedirect('/')
         else:
             resp = str(signup_form.errors) + " " + str(access_form.errors)
-            languages = models.users.LANG_CHOICES
-            context = {'response': resp,
-                       'languages': languages}
+            context = {'errors': resp}
     return render(request, 'accounts/signup.html', {})
