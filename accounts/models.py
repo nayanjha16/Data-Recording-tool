@@ -13,6 +13,7 @@ class users(models.Model):
     l_name = models.CharField(max_length=50)
     gender = models.CharField(choices=GENDER_CHOICES,
                               max_length=10)
+    age = models.IntegerField(default=0)
     contact = models.CharField(max_length=10)
     lang_fluent_in = models.CharField(max_length=50)
     disability = models.CharField(max_length=150)
